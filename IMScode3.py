@@ -105,7 +105,7 @@ class Admin:
                     print("Logged out.")
                     self.main()
                 elif choice == '3':
-                    print('Closing the Program. Thank you for shopping us!')
+                    print('Closing the Program. Thank you for shopping with us!')
                     break
                 else:
                     print("Invalid option.")
