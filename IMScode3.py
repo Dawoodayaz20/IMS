@@ -68,47 +68,47 @@ class Admin:
                 return 
         print('Product not in the inventory!')
 
-    def main(self):
-        role = Users().login()
-        if role is None:
-            return
+def main():
+    role = Users().login()
+    if role is None:
+        return
+    
+    while True:
+        if role == "Admin":
+            print("\nInventory Management System:\n1. Add Product\n2. Edit Product\n3. Delete Product\n4. View Inventory\n5. Check Stock level\n6. Logout\n7. Close the Program")
+            choice = input("Choose an option: ")
+            if choice == '1':
+                Admin().add_prod()
+            elif choice =='2':
+                Admin().edit_product()
+            elif choice == '3':
+                Admin().del_prod()
+            elif choice == '4':
+                Admin().view_inventory()
+            elif choice == '5':
+                Admin().check_stock_lev()
+            elif choice == '6':
+                print("Logged out.")
+                main()
+            elif choice == '7':
+                print('Closing the Program.')
+                exit()
+            else:
+                print("Invalid option.")
         
-        while True:
-            if role == "Admin":
-                print("\nInventory Management System:\n1. Add Product\n2. Edit Product\n3. Delete Product\n4. View Inventory\n5. Check Stock level\n6. Logout\n7. Close the Program")
-                choice = input("Choose an option: ")
-                if choice == '1':
-                    self.add_prod()
-                elif choice =='2':
-                    self.edit_product()
-                elif choice == '3':
-                    self.del_prod()
-                elif choice == '4':
-                    self.view_inventory()
-                elif choice == '5':
-                    self.check_stock_lev()
-                elif choice == '6':
-                    print("Logged out.")
-                    self.main()
-                elif choice == '7':
-                    print('Closing the Program.')
-                    exit()
-                else:
-                    print("Invalid option.")
-            
-            elif role == "User":
-                print("\n1. View Inventory\n2. Logout\n3. Close the Program")
-                choice = input("Choose an option: ")
-                if choice == "1":
-                    self.view_inventory()
-                elif choice == "2":
-                    print("Logged out.")
-                    self.main()
-                elif choice == '3':
-                    print('Closing the Program. Thank you for shopping with us!')
-                    exit()
-                else:
-                    print("Invalid option.")
+        elif role == "User":
+            print("\n1. View Inventory\n2. Logout\n3. Close the Program")
+            choice = input("Choose an option: ")
+            if choice == "1":
+                Admin().view_inventory()
+            elif choice == "2":
+                print("Logged out.")
+                main()
+            elif choice == '3':
+                print('Closing the Program. Thank you for shopping with us!')
+                exit()
+            else:
+                print("Invalid option.")
 
 if __name__ == "__main__":
-    Admin().main()
+    main()
