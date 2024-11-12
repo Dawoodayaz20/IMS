@@ -92,12 +92,12 @@ class Admin:
                     self.main()
                 elif choice == '7':
                     print('Closing the Program.')
-                    break
+                    exit()
                 else:
                     print("Invalid option.")
             
             elif role == "User":
-                print("\n1. View Inventory\n2. Logut\n3. Close the Program")
+                print("\n1. View Inventory\n2. Logout\n3. Close the Program")
                 choice = input("Choose an option: ")
                 if choice == "1":
                     self.view_inventory()
@@ -106,7 +106,7 @@ class Admin:
                     self.main()
                 elif choice == '3':
                     print('Closing the Program. Thank you for shopping with us!')
-                    break
+                    exit()
                 else:
                     print("Invalid option.")
 
