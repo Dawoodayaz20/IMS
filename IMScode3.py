@@ -25,7 +25,7 @@ class Admin:
         self.prod_name = (input('Enter the name of the product: '))
         self.price : float = float(int(input('Enter the price of the product: ')))
         self.serial_no : int = int(input('Enter the serial number of the product: '))
-        self.quantity : int = int(input('Enter the quantity of the product: '))
+        self.quantity : int = int(input('Enter the number of packets of the product: '))
         inventory.append({'name' : self.prod_name, 'price' : self.price, 'serial_num': self.serial_no, 'quantity': self.quantity})
         print('You have added a New Product!')
 
@@ -75,7 +75,8 @@ def main():
     
     while True:
         if role == "Admin":
-            print("\nInventory Management System:\n1. Add Product\n2. Edit Product\n3. Delete Product\n4. View Inventory\n5. Check Stock level\n6. Logout\n7. Close the Program")
+            print('Welcome to Inventory Management System!')
+            print("\n1. Add Product\n2. Edit Product\n3. Delete Product\n4. View Inventory\n5. Check Stock level\n6. Logout\n7. Close the Program")
             choice = input("Choose an option: ")
             if choice == '1':
                 Admin().add_prod()
@@ -100,6 +101,7 @@ def main():
             print("\n1. View Inventory\n2. Logout\n3. Close the Program")
             choice = input("Choose an option: ")
             if choice == "1":
+                print('Welcome to our online shopping mart')
                 Admin().view_inventory()
             elif choice == "2":
                 print("Logged out.")
