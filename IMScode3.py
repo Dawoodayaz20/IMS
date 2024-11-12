@@ -1,4 +1,4 @@
-#Inventory Management System: Try 5
+#Inventory Management System:
 
 users = {
     "admin": {"password": "admin789", "role": "Admin"},
