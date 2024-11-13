@@ -4,10 +4,12 @@ users = {
     "admin": {"password": "admin789", "role": "Admin"},
     "user": {"password": "user123", "role": "User"}
 }
-
+# Admins inventory:
 inventory : list = []      #The List of inventory products
+#Customer's cart:
+Customer_cart : list = []   #The List of products in customer's cart 
 
-low_stock_threshold = 5
+low_stock_threshold = 5     #least threshold for stock 
 
 class Users:
     def login(self):
@@ -18,12 +20,37 @@ class Users:
         else:
             print('Invalid credentials!')
             return None
+        
+# Customer Section:
+class Customer:
+#Customer's functions
+    def AddtoCart(self):
+        self.product_name : str = str(input('Enter the name of the product: '))
+        for i, product in enumerate(inventory):
+            if product['name'] == self.product_name :
+                try:
+                    self.prod_quantity = int(input('Enter the number of packets: '))
+                    Customer_cart.append({'name' : self.product_name, 'quantity': self.prod_quantity})
+                except ValueError as e:
+                    print(f'Input Value error: {e}')
+                print('The product has been added successfully!')   #When the product has been succesfullly added.
+                return 
+        print('Product not in the inventory!')
 
+    def ViewCart(self):
+        print('Your Cart:')
+        if not Customer_cart:
+            print('\nYour Cart is empty!')
+        else:
+            for product in Customer_cart:
+                print(product)
+
+# Admin Section:
 class Admin:
 #Admin Functions    
     def add_prod(self):
         self.prod_name = (input('Enter the name of the product: '))
-        self.price : float = float(int(input('Enter the price of the product: ')))
+        self.price : float = float(int(input('Enter the price of one pack of the product: ')))
         self.serial_no : int = int(input('Enter the serial number of the product: '))
         self.quantity : int = int(input('Enter the number of packets of the product: '))
         inventory.append({'name' : self.prod_name, 'price' : self.price, 'serial_num': self.serial_no, 'quantity': self.quantity})
@@ -89,25 +116,29 @@ def main():
             elif choice == '5':
                 Admin().check_stock_lev()
             elif choice == '6':
-                print("Logged out.")
+                print("Logged out.\n")
                 main()
             elif choice == '7':
-                print('Closing the Program.')
+                print('Closing the Program.\n')
                 exit()
             else:
                 print("Invalid option.")
         
         elif role == "User":
-            print("\n1. View Inventory\n2. Logout\n3. Close the Program")
+            print("\n1. View Inventory. \n2. Add Product to your Cart. \n3. View your Cart. \n4. Logout \n5. Close the Program")
             choice = input("Choose an option: ")
             if choice == "1":
-                print('Welcome to our online shopping mart')
+                print('\nWelcome to our online shopping mart')
                 Admin().view_inventory()
             elif choice == "2":
-                print("Logged out.")
-                main()
+                Customer().AddtoCart()
             elif choice == '3':
-                print('Closing the Program. Thank you for shopping with us!')
+                Customer().ViewCart()
+            elif choice == '4':
+                print('You have been logged out!\n')
+                main()
+            elif choice == '5':
+                print('Closing the program. Thank you for shopping with us!')
                 exit()
             else:
                 print("Invalid option.")
