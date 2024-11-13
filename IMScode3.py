@@ -49,12 +49,17 @@ class Customer:
 class Admin:
 #Admin Functions    
     def add_prod(self):
-        self.prod_name = (input('Enter the name of the product: '))
-        self.price : float = float(int(input('Enter the price of one pack of the product: ')))
-        self.serial_no : int = int(input('Enter the serial number of the product: '))
-        self.quantity : int = int(input('Enter the number of packets of the product: '))
-        inventory.append({'name' : self.prod_name, 'price' : self.price, 'serial_num': self.serial_no, 'quantity': self.quantity})
-        print('You have added a New Product!')
+        try:
+            self.prod_name = (input('Enter the name of the product: '))
+            self.price : float = float(int(input('Enter the price of one pack of the product: ')))
+            self.serial_no : int = int(input('Enter the serial number of the product: '))
+            self.quantity : int = int(input('Enter the number of packets of the product: '))
+            inventory.append({'name' : self.prod_name, 'price' : self.price, 'serial_num': self.serial_no, 'quantity': self.quantity})
+            print('You have added a New Product!')
+        except ValueError as e:
+            print(f'Error occured {e}')
+            print('Try entering the values again!\n')
+            self.add_prod()
 
     def view_inventory(self):
         if not inventory:
@@ -70,10 +75,14 @@ class Admin:
         self.prod_name = input('Enter the name of the product: ')
         for product in inventory:
             if product['name'] == self.prod_name:
-                product['price'] = float(input('Enter the new price of the product: '))
-                product['serial_num'] = int(input('Enter the new serial number: '))
-                print('Product has been updated successfully!')
-                return
+                try:
+                    product['price'] = float(input('Enter the new price of the product: '))
+                    product['serial_num'] = int(input('Enter the new serial number: '))
+                    print('Product has been updated successfully!')
+                except ValueError as e:
+                    print(f'Error occured {e}')
+                    print('Try entering the values again!\n')
+                    self.edit_product()
         print('Product not found!')
 
     def check_stock_lev(self):
@@ -102,7 +111,7 @@ def main():
     
     while True:
         if role == "Admin":
-            print('Welcome to Inventory Management System!')
+            print('\nWelcome to Inventory Management System!')
             print("\n1. Add Product\n2. Edit Product\n3. Delete Product\n4. View Inventory\n5. Check Stock level\n6. Logout\n7. Close the Program")
             choice = input("Choose an option: ")
             if choice == '1':
@@ -125,10 +134,10 @@ def main():
                 print("Invalid option.")
         
         elif role == "User":
+            print('\nWelcome to Online Shopping Mart!')
             print("\n1. View Inventory. \n2. Add Product to your Cart. \n3. View your Cart. \n4. Logout \n5. Close the Program")
             choice = input("Choose an option: ")
             if choice == "1":
-                print('\nWelcome to our online shopping mart')
                 Admin().view_inventory()
             elif choice == "2":
                 Customer().AddtoCart()
