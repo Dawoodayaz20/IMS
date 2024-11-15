@@ -68,8 +68,6 @@ class Admin:
             print('\nCurrent Inventory:')
             for product in inventory:
                 print(product)
-                if product['quantity'] <= low_stock_threshold:
-                    print(f'Warning Alert! ${product['name']} is running low on stock! Consider restocking')
         
     def edit_product(self):
         self.prod_name = input('Enter the name of the product: ')
